@@ -9,12 +9,16 @@ class Inventory extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
     
-    handleChange(e, key){
+    handleChange(e, key){ 
         const fish = this.props.fishes[key];
         // take a copy of that fish and update it with the new data
-        const updatedFish = {...fish, [e.target.name]: [e.target.value]};
+        const updatedFish = {
+            ...fish, 
+            [e.target.name]: e.target.value
+        }
+        this.props.updateFish(key, updatedFish);
     }
-            
+             
     renderInventory(key){
     const fish = this.props.fishes[key];
         return (
@@ -32,7 +36,7 @@ class Inventory extends React.Component {
             <button onClick={() => this.props.removeFish(key)}>Remove Fish</button>
           </div>
         )
-    }
+    } 
     
     render(){
         return(
